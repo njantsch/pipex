@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 11:14:01 by njantsch          #+#    #+#             */
-/*   Updated: 2023/03/29 18:21:16 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:29:21 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	{
 		if (st1[i] != st2[i])
 			return (st1[i] - st2[i]);
-			i++;
+		i++;
 	}
 	if (i == n)
 		return (0);

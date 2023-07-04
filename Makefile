@@ -14,9 +14,9 @@ $(NAME) : $(OBJECTS)
 
 clean:
 	@cd libs && make fclean
-	@rm -f $(OBJECTS) $(BONUS_OBJECTS)
+	@rm -f $(OBJECTS)
 
 fclean: clean
-	@rm -f $(NAME) $(NAME_BONUS)
+	@rm -f $(NAME)
 
 re:	fclean all

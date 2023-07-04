@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:09:01 by njantsch          #+#    #+#             */
-/*   Updated: 2023/07/03 17:41:46 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:03:33 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@
 
 typedef struct Pipex
 {
-	char	**final_path;
+	char	*path_to_file;
 	char	**args_child;
 	char	**args_parent;
 }	t_pipex;
 
-int		checks(t_pipex *s, int ac, char **av, char **envp);
-int		get_path(t_pipex *s, int ac, char **av, char **envp);
+int		get_path(t_pipex *s, char *arg, char **envp);
 int		check_path(t_pipex *s, char **path, char *cmd);
 
 t_pipex	*struc_init(char **av);
 void	free_prev_alloc(char **buff);
+void	ft_error(char *msg, t_pipex *s);
+void	ft_terminate_struct(t_pipex *s);
 
 void	parent_process(t_pipex *s, char **av, char **envp, int *fd);
 void	child_process(t_pipex *s, char **av, char **envp, int *fd);
