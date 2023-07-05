@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:01:39 by njantsch          #+#    #+#             */
-/*   Updated: 2023/07/04 18:07:32 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:31:08 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ t_pipex	*struc_init(char **av)
 	t_pipex	*st;
 
 	st = malloc(sizeof(t_pipex));
+	if (!st)
+		return (NULL);
 	st->args_child = ft_split(av[2], ' ');
+	if (!st->args_child)
+		return (free(st), NULL);
 	st->args_parent = ft_split(av[3], ' ');
+	if (!st->args_parent)
+		return (free_prev_alloc(st->args_child), free(st), NULL);
 	return (st);
 }
 
@@ -48,9 +54,9 @@ void	free_prev_alloc(char **buff)
 //---------------------------------------------------------//
 void	ft_error(char *msg, t_pipex *s)
 {
-	ft_terminate_struct(s);
 	perror(msg);
-	exit(1);
+	ft_terminate_struct(s);
+	exit(EXIT_FAILURE);
 }
 
 //--------------------------------------------------------------//

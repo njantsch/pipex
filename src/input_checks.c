@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 14:20:33 by njantsch          #+#    #+#             */
-/*   Updated: 2023/07/04 16:30:28 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:52:41 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ int	get_path(t_pipex *s, char *arg, char **envp)
 	char	*cmd;
 	char	**path;
 
-	i = 1;
+	i = 0;
 	while (ft_strncmp(envp[i], "PATH", 4) != 0 && envp[i])
 		i++;
 	if (envp[i] == NULL)
 		return (1);
 	path = ft_split(envp[i] + 5, ':');
 	i = 0;
+	if (!arg)
+		return (1);
 	while (arg[i] && arg[i] != ' ')
 		i++;
 	cmd = ft_substr(arg, 0, i);
