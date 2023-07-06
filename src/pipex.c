@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:08:25 by njantsch          #+#    #+#             */
-/*   Updated: 2023/07/05 18:40:41 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:40:25 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	parent_process(t_pipex *s, char **av, char **envp, int *fd)
 	dup2(out_file, STDOUT_FILENO);
 	close(fd[1]);
 	if (get_path(s, av[3], envp) == 1)
-		ft_error("Input error (second command)", s);
+		ft_error("get_path in parent process", s);
 	execve(s->path_to_file, s->args_parent, envp);
-	ft_error("Error with execve function in parent process", s);
+	ft_error("execve in parent process", s);
 }
 
 void	child_process(t_pipex *s, char **av, char **envp, int *fd)
@@ -39,9 +39,9 @@ void	child_process(t_pipex *s, char **av, char **envp, int *fd)
 	dup2(in_file, STDIN_FILENO);
 	close(fd[0]);
 	if (get_path(s, av[2], envp) == 1)
-		ft_error("Input error (first command)", s);
+		ft_error("get_path in child process", s);
 	execve(s->path_to_file, s->args_child, envp);
-	ft_error("Error with execve function in child process", s);
+	ft_error("execve in child process", s);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -69,6 +69,6 @@ int	main(int ac, char **av, char **envp)
 		ft_terminate_struct(s);
 	}
 	else
-		return (ft_printf("syntax error\n"), 1);
+		return (ft_printf("Syntax error\n"), 1);
 	return (0);
 }

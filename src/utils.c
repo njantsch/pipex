@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 19:01:39 by njantsch          #+#    #+#             */
-/*   Updated: 2023/07/05 18:31:08 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:21:19 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_pipex	*struc_init(char **av)
 	st = malloc(sizeof(t_pipex));
 	if (!st)
 		return (NULL);
+	st->path_to_file = NULL;
 	st->args_child = ft_split(av[2], ' ');
 	if (!st->args_child)
 		return (free(st), NULL);
@@ -40,6 +41,8 @@ void	free_prev_alloc(char **buff)
 	size_t	j;
 
 	j = 0;
+	if (!buff)
+		return ;
 	while (buff[j] != NULL)
 	{
 		free(buff[j]);
@@ -66,6 +69,7 @@ void	ft_terminate_struct(t_pipex *s)
 {
 	free_prev_alloc(s->args_child);
 	free_prev_alloc(s->args_parent);
-	free(s->path_to_file);
+	if (s->path_to_file != NULL)
+		free(s->path_to_file);
 	free(s);
 }
